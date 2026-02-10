@@ -1,3 +1,6 @@
+using GameZone.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace GameZone
 {
     public class Program
@@ -8,6 +11,8 @@ namespace GameZone
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            var connection = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("no connection string");
+            builder.Services.AddDbContext<ApplicationDbcontext>(options => options.UseSqlServer(connection));
 
             var app = builder.Build();
 
