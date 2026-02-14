@@ -15,6 +15,7 @@ namespace GameZone.ViewModel
 
         public IFormFile Cover { get; set; } = default!;
 
+        [Display(Name ="category")]
         public int CategoreyId { get; set; }
 
         public IEnumerable<SelectListItem> Categories { get; set; } = Enumerable.Empty<SelectListItem>();
