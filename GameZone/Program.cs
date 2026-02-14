@@ -16,6 +16,7 @@ namespace GameZone
             builder.Services.AddDbContext<ApplicationDbcontext>(options => options.UseSqlServer(connection));
             builder.Services.AddScoped<ICategoriesServices, CategoriesServices>();
             builder.Services.AddScoped<IDeviceServices, DevicesServices>();
+            builder.Services.AddScoped<IGameservice, Gameservice>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

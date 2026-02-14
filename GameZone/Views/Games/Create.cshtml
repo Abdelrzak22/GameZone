@@ -8,7 +8,7 @@
     Add New Game
 </h5>
 
-<form asp-controller="Games">
+<form asp-controller="Games" enctype="multipart/form-data">
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
@@ -20,13 +20,17 @@
             <div class="form-group">
                 <label asp-for="CategoreyId" class="form-label mt-4"></label>
                 <select class="form-select" asp-for="CategoreyId"
-                asp-items="Model.Categories"></select>
+                asp-items="Model.Categories">
+            <option></option>
+            </select>
                 <span asp-validation-for="CategoreyId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="SelectedDevices" class="form-label mt-4"></label>
                 <select class="form-select" asp-for="SelectedDevices"
-                        asp-items="Model.Devices"></select>
+                        asp-items="Model.Devices">
+                        <option></option>
+                    </select>
                 <span asp-validation-for="SelectedDevices" class="text-danger"></span>
             </div>
 

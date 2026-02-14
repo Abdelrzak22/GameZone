@@ -4,6 +4,7 @@ using GameZone.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Options;
+using System.Threading.Tasks;
 
 namespace GameZone.Controllers
 {
@@ -14,12 +15,14 @@ namespace GameZone.Controllers
 
         private readonly ICategoriesServices _categoriesServices;
         private readonly IDeviceServices _deviceServices;
+        private readonly IGameservice _gameService;
 
-        public GamesController(ApplicationDbcontext contrxt,ICategoriesServices x, IDeviceServices deviceServices   )
+        public GamesController(ApplicationDbcontext contrxt, ICategoriesServices x, IDeviceServices deviceServices, IGameservice gameService )
         {
             _context = contrxt;
             _categoriesServices = x;
             _deviceServices = deviceServices;
+            _gameService = gameService;
         }
 
         public IActionResult Index()
@@ -43,7 +46,7 @@ namespace GameZone.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(CreateGamefromviewmodel model)
+        public async Task<IActionResult> Create(CreateGamefromviewmodel model)
         {
 
             if (!ModelState.IsValid)
@@ -54,8 +57,9 @@ namespace GameZone.Controllers
                 return View(model);
 
             }
-            //save game to database
-            // save cover to server
+
+            await _gameService.Create(model);
+
 
             return RedirectToAction(nameof(Index));
 

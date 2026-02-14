@@ -15,7 +15,7 @@ namespace GameZone.services
         }
         public IEnumerable<SelectListItem> GetDevices()
         {
-            return _context.Categories.Select(d => new SelectListItem { Value = d.Id.ToString(), Text = d.Name }).OrderBy(x => x.Text).ToList();
+            return _context.Devices.Select(d => new SelectListItem { Value = d.Id.ToString(), Text = d.Name }).OrderBy(x => x.Text).ToList();
         }
     }
 }

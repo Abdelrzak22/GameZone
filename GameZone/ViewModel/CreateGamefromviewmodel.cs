@@ -11,7 +11,7 @@ namespace GameZone.ViewModel
         [MaxLength(2500)]
         public string Description { get; set; } = string.Empty;
 
-        [MaxLength(500)]
+        
 
         public IFormFile Cover { get; set; } = default!;
 
