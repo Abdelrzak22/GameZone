@@ -19,6 +19,8 @@ namespace GameZone.ViewModel
         public int CategoreyId { get; set; }
 
         public IEnumerable<SelectListItem> Categories { get; set; } = Enumerable.Empty<SelectListItem>();
+
+        [Display(Name="support Devices")]
         public List<int> SelectedDevices { get; set; } = new List<int>();
         public IEnumerable<SelectListItem> Devices { get; set; } = Enumerable.Empty<SelectListItem>();
 
