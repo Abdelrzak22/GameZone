@@ -1,4 +1,5 @@
 ﻿using GameZone.Data;
+using GameZone.services;
 using GameZone.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -11,9 +12,14 @@ namespace GameZone.Controllers
 
         private readonly ApplicationDbcontext _context;
 
-        public GamesController(ApplicationDbcontext contrxt)
+        private readonly ICategoriesServices _categoriesServices;
+        private readonly IDeviceServices _deviceServices;
+
+        public GamesController(ApplicationDbcontext contrxt,ICategoriesServices x, IDeviceServices deviceServices   )
         {
             _context = contrxt;
+            _categoriesServices = x;
+            _deviceServices = deviceServices;
         }
 
         public IActionResult Index()
@@ -28,8 +34,8 @@ namespace GameZone.Controllers
 
             CreateGamefromviewmodel viewmodel = new()
             {
-                Categories = _context.Categories.Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.Name }).OrderBy(c => c.Text).ToList(),
-                Devices =_context.Categories.Select(d => new SelectListItem { Value = d.Id.ToString(), Text = d.Name }).OrderBy(x => x.Text).ToList()
+                Categories = _categoriesServices.GetCategories(),
+                Devices = _deviceServices.GetDevices()
             };
 
             return View(viewmodel);
@@ -43,8 +49,8 @@ namespace GameZone.Controllers
             if (!ModelState.IsValid)
             {
 
-                model.Categories = _context.Categories.Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.Name }).OrderBy(c => c.Text).ToList();
-                model.Devices = _context.Categories.Select(d => new SelectListItem { Value = d.Id.ToString(), Text = d.Name }).OrderBy(x => x.Text).ToList();
+                model.Categories = _categoriesServices.GetCategories();
+                model.Devices = _deviceServices.GetDevices();
                 return View(model);
 
             }

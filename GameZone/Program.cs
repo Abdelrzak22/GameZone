@@ -1,4 +1,5 @@
 using GameZone.Data;
+using GameZone.services;
 using Microsoft.EntityFrameworkCore;
 
 namespace GameZone
@@ -13,7 +14,8 @@ namespace GameZone
             builder.Services.AddControllersWithViews();
             var connection = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("no connection string");
             builder.Services.AddDbContext<ApplicationDbcontext>(options => options.UseSqlServer(connection));
-
+            builder.Services.AddScoped<ICategoriesServices, CategoriesServices>();
+            builder.Services.AddScoped<IDeviceServices, DevicesServices>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
