@@ -17,6 +17,7 @@ namespace GameZone.ViewModel
 
 
         [AllowedExtentions(Filesetting.Allowedextentions)]
+        [Maxsize(Filesetting.maxfilesizebyte)]
         public IFormFile Cover { get; set; } = default!;
 
         [Display(Name ="category")]
