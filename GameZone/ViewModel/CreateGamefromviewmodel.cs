@@ -1,5 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using GameZone.Attribute;
+using GameZone.Setting;
 using System.ComponentModel.DataAnnotations;
+
+using System.Runtime.CompilerServices;
 
 namespace GameZone.ViewModel
 {
@@ -11,8 +15,8 @@ namespace GameZone.ViewModel
         [MaxLength(2500)]
         public string Description { get; set; } = string.Empty;
 
-        
 
+        [AllowedExtentions(Filesetting.Allowedextentions)]
         public IFormFile Cover { get; set; } = default!;
 
         [Display(Name ="category")]
