@@ -41,7 +41,9 @@
             </div>
             <div class="form-group">
                 <label asp-for="Cover" class="form-label mt-4"></label>
-                <input type="file" class="form-control" asp-for="Cover" placeholder="cover">
+                <input type="file" class="form-control" asp-for="Cover" placeholder="cover" 
+                data-rule-extension="@Filesetting.Allowedextentions.Replace(".",string.Empty)" 
+                data-msg-extension="not allowed extention" />   
                 <small class="form-text text-muted">only .jpg .jpes .png are allowed</small>
                 <span asp-validation-for="Cover" class="text-danger"></span>
             </div>
