@@ -52,8 +52,9 @@
             </div>
             <button type="submit" class="btn btn-light text-black mt-4">Save</button>
         </div>
-        <div class="col-md-6">
-        </div>
+       <div class="col-md-6 text-center pt-4">
+    <img id="Cover-view" alt="Cover" class="coverd  img-fluid" />
+</div>
     </div>
 </form>
 @section Scripts {
@@ -62,7 +63,25 @@
     <script>
         $.validator.addMethod("filesize",function(value,element,param){
 
-            return this.optional(element) || element.files[0]<= param;
+            return this.optional(element) || element.files[0].size <= param;
         });
+
+     $(document).ready(function () {
+
+    $('#Cover').on('change', function () {
+
+        var file = this.files[0];
+
+        if (file) {
+            var imageUrl = URL.createObjectURL(file);
+
+            $('#Cover-view')
+                .attr('src', imageUrl)
+                .removeClass('d-none');
+        }
+
+    });
+
+});
     </script>
 }
