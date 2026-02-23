@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<Game>
 
 @{
     ViewData["Title"] = "Games";
@@ -9,3 +9,37 @@
     <i class="bi bi-plus-circle-dotted"></i>
     Add Game
 </a>
+
+<div class="mt-5">
+    <table class="table game-table  align-middle ">
+        <tbody>
+
+            @foreach (var game in Model)
+            {
+                <tr class="border-1 border-success  ">
+                    <td style="width:100px;" >
+                        <img src="@($"{Filesetting.ImagePath}/{game.Cover}")" class="game-img" style="max-width:90px" />
+                    </td>
+
+                    <td>
+                        <div class="game-title">@game.Name</div>
+                        <div class="game-category">@game.categorey.Name</div>
+                    </td>
+
+                    <td class="text-end">
+                        <a asp-action="Edit" asp-route-id="@game.Id"
+                           class="btn btn-primary action-btn me-2">
+                            <i class="bi bi-pencil"></i>
+                        </a>
+
+                        <a asp-action="Delete" asp-route-id="@game.Id"
+                           class="btn btn-danger action-btn">
+                            <i class="bi bi-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>

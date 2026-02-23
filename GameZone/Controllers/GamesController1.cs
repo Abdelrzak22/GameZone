@@ -27,7 +27,14 @@ namespace GameZone.Controllers
 
         public IActionResult Index()
         {
-            return View();
+
+            var game = _gameService.Getall();
+            if (game == null)
+            {
+                throw new Exception("no game");
+            }
+            return View(game);
+
         }
 
         [HttpGet]
