@@ -1,21 +1,29 @@
 using System.Diagnostics;
 using GameZone.Models;
+using GameZone.services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GameZone.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IGameservice _game;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IGameservice game)
         {
-            _logger = logger;
+            _game = game;
         }
 
         public IActionResult Index()
         {
-            return View();
+
+            var game = _game.Getall();
+            if (game == null)
+            {
+                throw new Exception("no game");
+            }
+            return View(game);
+
         }
 
       

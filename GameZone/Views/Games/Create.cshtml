@@ -27,10 +27,11 @@
             </div>
             <div class="form-group">
                 <label asp-for="SelectedDevices" class="form-label mt-4"></label>
-                <select class="form-select" asp-for="SelectedDevices"
-                        asp-items="Model.Devices">
-                        <option></option>
-                    </select>
+               <select class="form-select border-2 border-primary shadow-lg rounded-4"
+        asp-for="SelectedDevices"
+        asp-items="Model.Devices"
+        multiple>
+</select>
                 <span asp-validation-for="SelectedDevices" class="text-danger"></span>
             </div>
 

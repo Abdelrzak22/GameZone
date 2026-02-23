@@ -1,6 +1,7 @@
 ﻿using GameZone.Data;
 using GameZone.Models;
 using GameZone.ViewModel;
+using Microsoft.EntityFrameworkCore;
 
 namespace GameZone.services
 {
@@ -16,6 +17,11 @@ namespace GameZone.services
             _context = contrxt;
             _webHostEnvironment = webHostEnvironment;
             _imagepath = $"{_webHostEnvironment.WebRootPath}/assests/image/games";
+        }
+
+        public IEnumerable<Game> Getall()
+        {
+            return _context.Games.Include(d=>d.categorey).Include(g=>g.Device).ThenInclude(d=>d.Device).AsNoTracking().ToList();
         }
         public async Task Create(CreateGamefromviewmodel game)
         {
@@ -37,5 +43,7 @@ namespace GameZone.services
             _context.SaveChanges();
 
         }
+
+     
     }
 }
