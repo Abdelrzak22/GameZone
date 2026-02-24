@@ -37,6 +37,12 @@ namespace GameZone.Controllers
 
         }
 
+        public IActionResult Details(int id)
+        {
+            var game=_gameService.GetGameById(id);
+            return View(game);
+        }
+
         [HttpGet]
 
         public IActionResult Create()

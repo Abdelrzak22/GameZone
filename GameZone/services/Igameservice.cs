@@ -6,6 +6,8 @@ namespace GameZone.services
     public interface IGameservice
     {
         IEnumerable<Game> Getall();
+
+        Game GetGameById(int id);
         Task Create(CreateGamefromviewmodel game);
     }
 }
