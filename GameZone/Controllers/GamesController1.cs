@@ -17,7 +17,7 @@ namespace GameZone.Controllers
         private readonly IDeviceServices _deviceServices;
         private readonly IGameservice _gameService;
 
-        public GamesController(ApplicationDbcontext contrxt, ICategoriesServices x, IDeviceServices deviceServices, IGameservice gameService )
+        public GamesController(ApplicationDbcontext contrxt, ICategoriesServices x, IDeviceServices deviceServices, IGameservice gameService)
         {
             _context = contrxt;
             _categoriesServices = x;
@@ -39,7 +39,7 @@ namespace GameZone.Controllers
 
         public IActionResult Details(int id)
         {
-            var game=_gameService.GetGameById(id);
+            var game = _gameService.GetGameById(id);
             return View(game);
         }
 
@@ -76,7 +76,28 @@ namespace GameZone.Controllers
 
             return RedirectToAction(nameof(Index));
 
-       
+
+        }
+
+        [HttpGet]
+        public IActionResult Edit (int id)
+        {
+            var game = _gameService.GetGameById(id);
+            Editviewmodel viewmodl = new()
+            {
+                id = id,
+                Name = game.Name,
+                Description = game.Description,
+                CategoreyId = game.CategoreyId,
+                SelectedDevices = game.Device.Select(d => d.DeviceId).ToList(),
+
+                Categories = _categoriesServices.GetCategories(),
+                Devices = _deviceServices.GetDevices(),
+                currentcover=game.Cover
+
+            };
+            return View(viewmodl);
+
         }
 
 
