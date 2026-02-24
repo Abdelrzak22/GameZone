@@ -99,6 +99,31 @@ namespace GameZone.Controllers
             return View(viewmodl);
 
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(Editviewmodel model)
+        {
+
+            if (!ModelState.IsValid)
+            {
+
+                model.Categories = _categoriesServices.GetCategories();
+                model.Devices = _deviceServices.GetDevices();
+                return View(model);
+
+            }
+
+            var game = await _gameService.update(model);
+            if (game is null)
+                return BadRequest();
+           
+
+
+
+            return RedirectToAction(nameof(Index));
+
+
+        }
 
 
     }
