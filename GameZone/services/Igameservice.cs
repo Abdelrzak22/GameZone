@@ -10,5 +10,6 @@ namespace GameZone.services
         Game GetGameById(int id);
         Task Create(CreateGamefromviewmodel game);
         Task<Game?> update(Editviewmodel model);
+        bool delete(int id);
     }
 }

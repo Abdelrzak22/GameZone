@@ -124,6 +124,13 @@ namespace GameZone.Controllers
 
 
         }
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            var delet=_gameService.delete(id);
+
+            return delet ? Ok() : BadRequest();
+        }
 
 
     }

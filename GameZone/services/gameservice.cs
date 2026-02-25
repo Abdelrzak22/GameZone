@@ -94,5 +94,26 @@ namespace GameZone.services
             return CoverName ;
 
         }
+
+        public bool delete(int id)
+        {
+            var game = _context.Games.Find(id);
+            if (game == null)
+                return false;
+
+            _context.Remove(game);
+            var affectedRows = _context.SaveChanges();
+
+            if (affectedRows > 0)
+            {
+                var cover = Path.Combine(_imagepath, game.Cover);
+                if (File.Exists(cover))
+                    File.Delete(cover);
+
+                return true;
+            }
+
+            return false;
+        }
     }
 }

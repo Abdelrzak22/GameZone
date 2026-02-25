@@ -32,10 +32,11 @@
                             <i class="bi bi-pencil"></i>
                         </a>
 
-                        <a asp-action="Delete" asp-route-id="@game.Id"
-                           class="btn btn-danger action-btn">
+                        <button type="button"
+                                class="btn btn-danger action-btn"
+                                data-id="@game.Id">
                             <i class="bi bi-trash"></i>
-                        </a>
+                        </button>
                     </td>
                 </tr>
             }
@@ -43,3 +44,8 @@
         </tbody>
     </table>
 </div>
+
+@section Scripts {
+    <script src="~/js/game-index.js" asp-append-version="true"></script>
+
+}
